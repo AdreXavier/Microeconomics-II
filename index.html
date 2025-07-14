@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFSCar - Microeconomia II - Guia Completo</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilo base do corpo do site */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Fundo azul-escuro */
+            color: #d1d5db; /* Cor do texto principal (cinza claro) */
+        }
+        
+        /* Estilo dos botões das abas de navegação */
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: #9ca3af; /* Cor do botão inativo */
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-btn:hover {
+            color: #e5e7eb; /* Cor ao passar o mouse */
+        }
+        .tab-btn.active {
+            color: #60a5fa; /* Cor do botão ativo (azul) */
+            border-bottom-color: #60a5fa;
+        }
+        
+        /* Controle de visibilidade dos painéis das abas */
+        .tab-panel {
+            display: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+        
+        /* Estilo padrão para as seções de conteúdo */
+        .content-section {
+            background-color: #1f2937; /* Fundo da seção (mais claro que o body) */
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        
+        /* Títulos principais de cada seção */
+        .content-section h2 {
+            color: #60a5fa;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: 700;
+        }
+        
+        /* Subtítulos */
+        .content-section h3 {
+            color: #93c5fd;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            line-height: 2rem;
+            font-weight: 600;
+        }
+
+        /* Sub-subtítulos */
+        .content-section h4 {
+            color: #a5b4fc;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+            font-weight: 600;
+        }
+        
+        /* Tabelas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #4b5563;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #374151;
+            color: #e5e7eb;
+        }
+        
+        /* Container para os gráficos SVG */
+        .chart-container {
+            background-color: #374151;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .chart-container svg {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 550px;
+            height: auto;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            border-radius: 0.25rem;
+        }
+        .chart-container .caption {
+            color: #d1d5db;
+            margin-top: 1rem;
+            font-style: italic;
+            text-align: center;
+            max-width: 550px;
+        }
+        
+        /* Estilo dos termos do glossário */
+        .glossary-term {
+            background-color: #374151;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .glossary-term strong {
+            color: #60a5fa;
+        }
+        
+        /* Estilo para botões e inputs da calculadora */
+        .btn {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2563eb;
+        }
+        input[type=number], input[type=range] {
+            background-color: #4b5563;
+            border: 1px solid #6b7280;
+            color: #e5e7eb;
+            border-radius: 0.375rem;
+            padding: 0.5rem;
+            width: 100%;
+        }
+        input[type=range] {
+            padding: 0;
+        }
+        
+        /* Estilo para blocos de exercício */
+        .exercise-block {
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-block .solution {
+            background-color: #161e2b;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .formula {
+            background-color: #161e2b;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            color: #a5b4fc;
+        }
+
+        /* Estilo para matrizes de jogos */
+        .game-matrix-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .game-matrix {
+            border-collapse: collapse;
+            border: 2px solid #4b5563;
+        }
+        .game-matrix caption {
+            caption-side: top;
+            font-weight: 600;
+            color: #93c5fd;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+        .game-matrix th, .game-matrix td {
+            border: 1px solid #4b5563;
+            padding: 1rem;
+            text-align: center;
+            min-width: 100px;
+        }
+        .game-matrix th {
+            background-color: #374151;
+            color: #e5e7eb;
+        }
+        .game-matrix th span {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            white-space: nowrap;
+        }
+        .game-matrix td {
+            background-color: #1f2937;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #d1d5db;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-400">UFSCar - Microeconomia II</h1>
+        </header>
+
+        <div class="border-b border-gray-700 mb-8">
+            <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
+                <button class="tab-btn active" data-target="equilibrio-geral">Equilíbrio Geral</button>
+                <button class="tab-btn" data-target="externalidades">Externalidades e Bens Públicos</button>
+                <button class="tab-btn" data-target="assimetria">Assimetria de Informação</button>
+                <button class="tab-btn" data-target="poder-mercado">Poder de Mercado</button>
+                <button class="tab-btn" data-target="teoria-jogos">Teoria dos Jogos</button>
+                <button class="tab-btn" data-target="exercicios">Exercícios</button>
+                <button class="tab-btn" data-target="glossario">Glossário</button>
+            </nav>
+        </div>
+
+        <main id="tab-content">
+            <div id="equilibrio-geral" class="tab-panel active">
+                <section class="content-section">
+                    <h2>Equilíbrio Geral e Eficiência Econômica</h2>
+                    <p>A análise de equilíbrio geral estuda como a oferta e a demanda interagem em vários mercados para determinar os preços e as quantidades de todos os bens simultaneamente. Diferente da análise de equilíbrio parcial, ela considera os <strong>efeitos de feedback</strong>: uma mudança de preço em um mercado afeta os preços e as quantidades em mercados relacionados, que por sua vez causam um feedback no mercado original.</p>
+                    
+                    <h3>Exemplo: Efeito de Feedback de um Imposto (Margarina e Manteiga)</h3>
+                    <p>Este exemplo clássico ilustra como um imposto sobre a margarina afeta não apenas seu próprio mercado, mas também o mercado de um bem substituto, a manteiga, e como essas mudanças repercutem de volta até um novo equilíbrio geral.</p>
+                    <div class="chart-container">
+                        <svg viewBox="0 0 200 150">
+                            <title>Efeito de Feedback de um Imposto</title>
+                            <text x="25" y="10" font-size="8" font-weight="bold" fill="#111827">a) Mercado de Margarina</text>
+                            <path d="M 10 100 L 90 20" stroke="#0ea5e9" fill="none" stroke-width="1.5"/> <text x="70" y="18" fill="#0ea5e9" font-size="7">Dmg</text>
+                            <path d="M 10 30 L 90 110" stroke="#0ea5e9" fill="none" stroke-width="1.5"/> <text x="70" y="115" fill="#0ea5e9" font-size="7">Omg1</text>
+                            <path d="M 10 60 L 90 140" stroke="#f87171" fill="none" stroke-width="1.5"/> <text x="70" y="145" fill="#f87171" font-size="7">Omg* (c/ imposto)</text>
+                            <circle cx="50" cy="65" r="1.5" fill="#111827"/> <text x="30" y="68" fill="#111827" font-size="6">Eq. Parcial</text>
+                            <circle cx="58" cy="85" r="2" fill="#e11d48"/> <text x="62" y="88" fill="#e11d48" font-size="6">Eq. Geral (B)</text>
+                            
+                            <text x="120" y="10" font-size="8" font-weight="bold" fill="#111827">b) Mercado de Manteiga</text>
+                            <path d="M 110 110 L 190 30" stroke="#0ea5e9" fill="none" stroke-width="1.5"/> <text x="170" y="28" fill="#0ea5e9" font-size="7">Dmt1</text>
+                            <path d="M 110 120 L 190 40" stroke="#111827" fill="none" stroke-width="1.5"/> <text x="170" y="38" fill="#111827" font-size="7">Dmt2</text>
+                            <path d="M 110 130 L 190 50" stroke="#f87171" fill="none" stroke-width="1.5"/> <text x="170" y="48" fill="#f87171" font-size="7">Dmt*</text>
+                            <path d="M 110 30 L 190 110" stroke="#0ea5e9" fill="none" stroke-width="1.5"/> <text x="170" y="115" fill="#0ea5e9" font-size="7">Omt</text>
+                            <circle cx="158" cy="79" r="2" fill="#e11d48"/> <text x="162" y="82" fill="#e11d48" font-size="6">Eq. Geral (A)</text>
+                            
+                            <path d="M 95 60 L 105 60" stroke="#111827" fill="none" stroke-width="1" marker-end="url(#arrow)"/>
+                            <path d="M 105 90 L 95 90" stroke="#111827" fill="none" stroke-width="1" marker-end="url(#arrow)"/>
+                            <defs><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111827"/></marker></defs>
+                        </svg>
+                        <p class="caption">1. Imposto em (a) eleva o preço, deslocando a demanda D em (b) para a direita. 2. O aumento de preço em (b) desloca a demanda D em (a) também para a direita. O processo continua até o novo equilíbrio geral (pontos A e B).</p>
+                    </div>
+
+                    <h3>Eficiência de Pareto e Eficiência nas Trocas</h3>
+                    <p>Uma alocação é <strong>Eficiente de Pareto</strong> se for impossível melhorar o bem-estar de alguém sem piorar o de outro. Nas trocas, a eficiência é alcançada quando a <strong>Taxa Marginal de Substituição (TMS)</strong> entre dois bens é a mesma para todos os consumidores. A <strong>Caixa de Edgeworth</strong> é a ferramenta que visualiza todas as alocações possíveis e eficientes.</p>
+                    <div class="chart-container">
+                        <svg viewBox="0 0 200 140">
+                            <title>Caixa de Edgeworth de Consumo</title>
+                            <rect x="10" y="10" width="180" height="120" stroke="#4b5563" fill="none" stroke-width="0.5"/>
+                            <text x="5" y="75" fill="#d1d5db" font-size="8" transform="rotate(-90 5 75)">Vestuário</text>
+                            <text x="80" y="138" fill="#d1d5db" font-size="8">Alimentos</text>
+                            <text x="10" y="8" fill="#60a5fa" font-size="8">Origem Brasil</text>
+                            <text x="160" y="138" fill="#f87171" font-size="8">Origem China</text>
+                            <path d="M 40 120 Q 80 60 180 40" stroke="#60a5fa" fill="none" stroke-width="1.2"/><text x="145" y="35" fill="#60a5fa" font-size="7">CI (Brasil)</text>
+                            <path d="M 160 20 Q 120 80 20 100" stroke="#f87171" fill="none" stroke-width="1.2"/><text x="55" y="110" fill="#f87171" font-size="7">CI (China)</text>
+                            <path d="M 10 130 Q 90 70 190 10" stroke="#34d399" fill="none" stroke-width="1.5" stroke-dasharray="2,2"/>
+                            <text x="100" y="60" fill="#34d399" font-size="7">Curva de Contrato</text>
+                            <circle cx="95" cy="68" r="1.5" fill="#facc15"/><text x="98" y="70" fill="#facc15" font-size="7">Ponto Eficiente (TMS_br = TMS_ch)</text>
+                            <circle cx="120" cy="90" r="1.5" fill="#9ca3af"/><text x="123" y="92" fill="#9ca3af" font-size="7">Ponto Ineficiente</text>
+                        </svg>
+                        <p class="caption">A Curva de Contrato (linha verde) une todos os pontos onde as curvas de indiferença dos dois agentes são tangentes, representando as alocações eficientes.</p>
+                    </div>
+
+                    <h3>Eficiência na Produção e a Fronteira de Possibilidades de Produção (FPP)</h3>
+                    <p>A produção é eficiente quando os insumos (capital e trabalho) são alocados de forma que não se pode aumentar a produção de um bem sem diminuir a de outro. Isso ocorre quando a <strong>Taxa Marginal de Substituição Técnica (TMST)</strong> entre os insumos é a mesma para todas as firmas. A FPP mostra as combinações máximas de bens que uma economia pode produzir com seus recursos. A inclinação da FPP é a <strong>Taxa Marginal de Transformação (TMT)</strong>, que mede o custo de oportunidade de um bem em termos do outro.</p>
+                    
+                    <h4>Eficiência Geral da Economia</h4>
+                    <p>Para que a economia atinja a máxima eficiência, a taxa à qual os consumidores estão dispostos a trocar um bem por outro (TMS) deve ser igual à taxa à qual a economia pode transformar um bem no outro (TMT). A condição de eficiência geral é, portanto, <strong>TMT = TMS</strong>.</p>
+                    <div class="chart-container">
+                        <svg viewBox="0 0 200 150">
+                            <title>Fronteira de Possibilidades de Produção e Eficiência</title>
+                            <path d="M 40 120 C 80 115, 120 80, 140 40" stroke="#fbbf24" fill="#fbbf24" fill-opacity="0.1" stroke-width="2"/>
+                            <text x="80" y="100" fill="#fbbf24" font-size="8">FPP</text>
+                            <path d="M 60 130 C 90 90, 130 70, 160 60" stroke="#60a5fa" fill="none" stroke-width="1.5"/>
+                            <text x="140" y="55" fill="#60a5fa" font-size="8">Curva de Indiferença</text>
+                            <circle cx="103" cy="85" r="2" fill="#e11d48"/>
+                            <text x="106" y="83" fill="#e11d48" font-size="7">Ponto Ótimo (TMT = TMS)</text>
+                            <line x1="20" y1="10" x2="20" y2="130" stroke="#4b5563" stroke-width="0.5"/>
+                            <line x1="20" y1="130" x2="180" y2="130" stroke="#4b5563" stroke-width="0.5"/>
+                            <text x="5" y="15" fill="#d1d5db" font-size="8">Vestuário</text>
+                            <text x="170" y="140" fill="#d1d5db" font-size="8">Alimentos</text>
+                        </svg>
+                        <p class="caption">A eficiência máxima (ótimo de Pareto) ocorre onde a mais alta curva de indiferença da sociedade tangencia a Fronteira de Possibilidades de Produção.</p>
+                    </div>
+                    
+                    <h3>Os Teoremas Fundamentais do Bem-Estar</h3>
+                    <p>Estes dois teoremas formam a base da economia do bem-estar e conectam o conceito de equilíbrio competitivo com a eficiência de Pareto.</p>
+                    <ul class="list-disc list-inside space-y-3 mt-4">
+                        <li>
+                            <strong>Primeiro Teorema do Bem-Estar:</strong> Afirma que, sob certas condições (mercados completos, ausência de externalidades, agentes tomadores de preço), qualquer equilíbrio competitivo de mercado é Pareto-eficiente. É a formalização da "mão invisível" de Adam Smith. Isso significa que, se deixarmos os mercados funcionarem livremente, o resultado será eficiente (não haverá desperdício).
+                        </li>
+                        <li>
+                            <strong>Segundo Teorema do Bem-Estar:</strong> Afirma que qualquer alocação Pareto-eficiente pode ser alcançada como um equilíbrio competitivo, desde que se faça uma redistribuição inicial adequada das dotações dos agentes. Este teorema é poderoso porque separa questões de <strong>eficiência</strong> de questões de <strong>equidade</strong>. Se a sociedade não gosta da distribuição de renda resultante do mercado, o governo pode redistribuir a riqueza inicial (por meio de impostos e transferências "lump-sum") e depois deixar o mercado operar livremente para atingir um ponto eficiente e mais equitativo na curva de contrato.
+                        </li>
+                    </ul>
+
+                    <h3>Vantagens Comparativas e Ganhos de Comércio Internacional</h3>
+                    <p>Mesmo que um país seja mais produtivo em todos os bens (<strong>vantagem absoluta</strong>), o comércio ainda é benéfico se cada país se especializar no bem em que tem <strong>vantagem comparativa</strong> (menor custo de oportunidade). A especialização e o comércio permitem que os países consumam uma cesta de bens para além de sua própria Fronteira de Possibilidades de Produção.</p>
+                    <div class="chart-container">
+                        <svg viewBox="0 0 200 150">
+                            <title>Ganhos de Comércio</title>
+                            <path d="M 30 110 C 70 105, 110 70, 130 30" stroke="#fbbf24" fill="none" stroke-width="2"/>
+                            <text x="80" y="90" fill="#fbbf24" font-size="8">FPP</text>
+                            <circle cx="110" cy="65" r="1.5" fill="#111827"/>
+                            <text x="90" y="63" fill="#111827" font-size="7">Produção (Especialização)</text>
+                            <circle cx="90" cy="85" r="1.5" fill="#e11d48"/>
+                            <text x="65" y="83" fill="#e11d48" font-size="7">Consumo (Pós-troca)</text>
+                            <line x1="40" y1="130" x2="160" y2="40" stroke="#34d399" stroke-width="1.5" stroke-dasharray="2,2"/>
+                            <text x="135" y="35" fill="#34d399" font-size="7">Linha de Preço Mundial</text>
+                            <path d="M 50 120 C 70 90, 100 75, 130 70" stroke="#60a5fa" fill="none" stroke-width="1.5"/>
+                            <text x="110" y="68" fill="#60a5fa" font-size="7">CI (pós-comércio)</text>
+                        </svg>
+                        <p class="caption">Com o comércio internacional, um país pode se especializar na produção (ponto na FPP) e, por meio da troca, atingir um ponto de consumo (ponto vermelho) em uma curva de indiferença mais alta, que antes era inatingível.</p>
+                    </div>
+                </section>
+            </div>
+
+            <div id="externalidades" class="tab-panel">
+                <section class="content-section">
+                    <h2>Externalidades, Bens Públicos e Recursos Comuns</h2>
+                    <p>Os mercados nem sempre levam a resultados eficientes. <strong>Falhas de mercado</strong> ocorrem quando os preços não refletem todos os custos e benefícios sociais. As principais fontes são externalidades, bens públicos e recursos comuns.</p>
+
+                    <h3>Externalidades</h3>
+                    <p>Uma <strong>externalidade</strong> ocorre quando a ação de um agente econômico afeta diretamente o bem-estar de outros, e esse efeito não é compensado ou refletido nos preços de mercado.</p>
+
+                    <h4>Externalidade Negativa</h4>
+                    <p>Ocorre quando uma atividade impõe um custo a terceiros (ex: poluição de uma fábrica). O <strong>Custo Social Marginal (CSM)</strong>, que inclui o dano externo, é maior que o <strong>Custo Privado Marginal (CPM)</strong>. Sem intervenção, o mercado produz uma quantidade (Q_priv) maior que a socialmente ótima (Q*), gerando uma perda de bem-estar social (peso-morto).</p>
+                    <div class="chart-container">
+                        <svg viewBox="0 0 200 150">
+                            <title>Externalidade Negativa</title>
+                            <line x1="20" y1="10" x2="20" y2="130" stroke="#4b5563" stroke-width="0.5"/><text x="5" y="15" fill="#d1d5db">P, Custo</text>
+                            <line x1="20" y1="130" x2="190" y2="130" stroke="#4b5563" stroke-width="0.5"/><text x="185" y="140" fill="#d1d5db">Q</text>
+                            <path d="M 40 120 L 180 30" stroke="#60a5fa" fill="none" stroke-width="1.5"/><text x="160" y="25" fill="#60a5fa">D = BSM</text>
+                            <path d="M 40 40 L 180 120" stroke="#fbbf24" fill="none" stroke-width="1.5"/><text x="160" y="125" fill="#fbbf24">CPM (Oferta)</text>
+                            <path d="M 40 60 L 180 140" stroke="#f87171" fill="none" stroke-width="1.5"/><text x="140" y="145" fill="#f87171">CSM = CPM+CEM</text>
+                            <polygon points="110,75 133,63 133,93" fill="#f87171" fill-opacity="0.3" /><text x="112" y="65" fill="#f87171" font-size="7">Peso-morto</text>
+                            <line x1="110" y1="75" x2="110" y2="130" stroke-dasharray="2,2" stroke="#9ca3af" stroke-width="0.5"/><text x="105" y="140" fill="#d1d5db">Q*</text>
+                            <line x1="133" y1="93" x2="133" y2="130" stroke-dasharray="2,2" stroke="#9ca3af" stroke-width="0.5"/><text x="128" y="140" fill="#d1d5db">Q_priv</text>
+                        </svg>
+                        <p class="caption">A área triangular representa a perda de bem-estar social (peso-morto) causada pela produção excessiva.</p>
+                    </div>
+
+                    <h4>Externalidade Positiva</h4>
+                    <p>Ocorre quando uma atividade gera um benefício para terceiros (ex: pesquisa e desenvolvimento, vacinação). O <strong>Benefício Social Marginal (BSM)</strong> é maior que o <strong>Benefício Privado Marginal (BPM)</strong>. O mercado produz uma quantidade (Q_priv) menor que a socialmente ótima (Q*), também gerando um peso-morto.</p>
+                    <div class="chart-container">
+                        <svg viewBox="0 0 200 150">
+                            <title>Externalidade Positiva</title>
+                            <line x1="20" y1="10" x2="20" y2="130" stroke="#4b5563" stroke-width="0.5"/><text x="5" y="15" fill="#d1d5db">P, Benef.</text>
+                            <line x1="20" y1="130" x2="190" y2="130" stroke="#4b5563" stroke-width="0.5"/><text x="185" y="140" fill="#d1d5db">Q</text>
+                            <path d="M 40 40 L 180 120" stroke="#fbbf24" fill="none" stroke-width="1.5"/><text x="160" y="125" fill="#fbbf24">C = CSM</text>
+                            <path d="M 40, 100 L 160, 30" stroke="#60a5fa" fill="none" stroke-width="1.5"/><text x="145" y="25" fill="#60a5fa">BPM (Demanda)</text>
+                            <path d="M 40, 120 L 180, 40" stroke="#34d399" fill="none" stroke-width="1.5"/><text x="165" y="35" fill="#34d399">BSM = BPM+BEM</text>
+                            <polygon points="108,74 128,64 108,84" fill="#f87171" fill-opacity="0.3" /><text x="110" y="63" fill="#f87171" font-size="7">Peso-morto</text>
+                            <line x1="108" y1="84" x2="108" y2="130" stroke-dasharray="2,2" stroke="#9ca3af" stroke-width="0.5"/><text x="103" y="140" fill="#d1d5db">Q_priv</text>
+                            <line x1="128" y1="74" x2="128" y2="130" stroke-dasharray="2,2" stroke="#9ca3af" stroke-width="0.5"/><text x="125" y="140" fill="#d1d5db">Q*</text>
+                        </svg>
+                        <p class="caption">O peso-morto surge porque a sociedade se beneficiaria de uma produção maior, mas não há incentivo privado para isso.</p>
+                    </div>
+                    
+                    <h3>Soluções para Externalidades</h3>
+                    <table class="table-auto">
+                        <thead><tr><th>Solução</th><th>Descrição</th><th>Vantagens e Desvantagens</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Padrões de Emissão</strong></td><td>O governo estabelece um limite legal para a externalidade (ex: poluição).</td><td><strong>V:</strong> Simples de entender; certeza sobre o nível da externalidade. <br><strong>D:</strong> Ineficiente se os custos de redução variarem entre as firmas.</td></tr>
+                            <tr><td><strong>Impostos de Pigou</strong></td><td>Um imposto sobre cada unidade de produção que gera externalidade negativa, idealmente igual ao custo externo marginal.</td><td><strong>V:</strong> Leva à produção eficiente; gera receita para o governo. <br><strong>D:</strong> Difícil calcular o imposto exato, pois o CEM pode ser desconhecido.</td></tr>
+                            <tr><td><strong>Subsídios</strong></td><td>Um pagamento para incentivar uma atividade que gera externalidade positiva.</td><td><strong>V:</strong> Corrige a subprodução; estimula inovação. <br><strong>D:</strong> Custo para o governo; difícil calcular o subsídio ótimo.</td></tr>
+                            <tr><td><strong>Permissões Transferíveis</strong></td><td>O governo define um nível total de poluição e distribui ou vende permissões. As firmas podem negociar essas permissões.</td><td><strong>V:</strong> Combina a certeza do padrão com a eficiência do imposto (a redução é feita por quem tem menor custo); cria um mercado. <br><strong>D:</strong> A distribuição inicial das permissões pode ser politicamente controversa.</td></tr>
+                            <tr><td><strong>Teorema de Coase</strong></td><td>Se os direitos de propriedade forem bem definidos e os custos de transação forem baixos, as partes podem negociar e chegar a uma solução eficiente, independentemente de quem detém o direito.</td><td><strong>V:</strong> Solução privada, sem necessidade de intervenção direta do governo. <br><strong>D:</strong> Na prática, os custos de transação raramente são nulos, especialmente com muitas partes envolvidas.</td></tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Bens Públicos e o Problema do Carona (Free-Rider)</h3>
+                    <p>Bens públicos são um caso extremo de externalidade positiva. Eles possuem duas características principais:</p>
+                    <ul class="list-disc list-inside space-y-2 mt-2 mb-4">
+                        <li><strong>Não-Rival:</strong> O consumo do bem por uma pessoa não impede ou reduz o consumo por outra (ex: defesa nacional, um farol).</li>
+                        <li><strong>Não-Excludente:</strong> É impossível ou muito custoso impedir que alguém consuma o bem, mesmo que não pague por ele (ex: queima de fogos de artifício).</li>
+                    </ul>
+                    <p>Devido a essas características, surge o <strong>problema do carona (free-rider)</strong>: os indivíduos têm um incentivo para não pagar pelo bem, esperando que outros paguem, e ainda assim desfrutar de seus benefícios. Como resultado, o mercado privado fornecerá uma quantidade insuficiente ou nula de bens públicos, mesmo que o benefício social total exceda o custo. A provisão eficiente de um bem público ocorre quando a soma dos benefícios marginais individuais (a disposição a pagar de todos) iguala o custo marginal de provisão.</p>
+
+                    <h3>Recursos de Propriedade Comum e a Tragédia dos Comuns</h3>
+                    <p>Recursos de propriedade comum são o oposto dos bens públicos: são <strong>rivais</strong>, mas <strong>não-excludentes</strong> (o uso por um impede o uso por outro, mas não se pode impedir o acesso). Exemplos incluem áreas de pesca, pastagens comuns e aquíferos.</p>
+                    <p>Isso leva à <strong>Tragédia dos Comuns</strong>: sem regulação, cada indivíduo tem o incentivo a sobre-explorar o recurso para maximizar seu ganho pessoal, ignorando o custo que impõe aos outros (o esgotamento do recurso). O Custo Social Marginal de usar o recurso é maior que o Custo Privado (que muitas vezes é percebido como zero), levando ao uso excessivo e, potencialmente, ao colapso do recurso.</p>
+                    <div class="chart-container">
+                        <svg viewBox="0 0 200 150">
+                            <title>Tragédia dos Comuns</title>
+                             <line x1="20" y1="10" x2="20" y2="130" stroke="#4b5563" stroke-width="0.5"/><text x="5" y="15" fill="#d1d5db">Benef./Custo</text>
+                            <line x1="20" y1="130" x2="190" y2="130" stroke="#4b5563" stroke-width="0.5"/><text x="185" y="140" fill="#d1d5db">Nº de Barcos (Esforço)</text>
+                            <path d="M 40 120 L 180 30" stroke="#60a5fa" fill="none" stroke-width="1.5"/><text x="160" y="25" fill="#60a5fa">Demanda (Benef. Marg. Privado)</text>
+                            <path d="M 20 50 L 190 50" stroke="#fbbf24" fill="none" stroke-width="1.5"/><text x="150" y="48" fill="#fbbf24">Custo Privado Marginal</text>
+                            <path d="M 40 60 L 180 140" stroke="#f87171" fill="none" stroke-width="1.5"/><text x="140" y="145" fill="#f87171">Custo Social Marginal</text>
+                            <line x1="147" y1="50" x2="147" y2="130" stroke-dasharray="2,2" stroke="#9ca3af" stroke-width="0.5"/><text x="142" y="140" fill="#d1d5db">Q_priv (Tragédia)</text>
+                            <line x1="100" y1="80" x2="100" y2="130" stroke-dasharray="2,2" stroke="#9ca3af" stroke-width="0.5"/><text x="95" y="140" fill="#d1d5db">Q_eficiente</text>
+                        </svg>
+                        <p class="caption">O equilíbrio privado (Q_priv) ocorre com muito mais exploração do que o nível socialmente eficiente (Q_eficiente), onde o Custo Social se iguala ao Benefício.</p>
+                    </div>
+                </section>
+            </div>
+
+            <div id="assimetria" class="tab-panel">
+                <section class="content-section">
+                    <h2>Assimetria de Informação</h2>
+                    <p>Ocorre quando uma das partes em uma transação tem mais ou melhores informações do que a outra. Isso viola a premissa de informação perfeita dos modelos competitivos e pode levar a duas falhas de mercado principais: seleção adversa e risco moral.</p>
+                    
+                    <h3>Seleção Adversa: O Problema dos "Lemons" (Akerlof)</h3>
+                    <p>Surge <strong>antes</strong> da transação, devido a características ocultas. Vendedores conhecem a qualidade de seus produtos (ex: carros usados), mas os compradores não. Compradores, temendo comprar um "lemon" (carro ruim), calculam o valor esperado e oferecem um preço médio. Esse preço pode ser muito baixo para os donos de carros bons, que retiram seus produtos do mercado. No limite, apenas os "lemons" são vendidos, e o mercado para bens de alta qualidade pode desaparecer.</p>
+                    <div class="chart-container">
+                        <svg viewBox="0 0 200 150">
+                             <title>O Mercado de Lemons</title>
+                             <text x="20" y="10" font-size="8" font-weight="bold" fill="#111827">Mercado de Carros de Alta Qualidade</text>
+                             <line x1="20" y1="15" x2="20" y2="130" stroke="#4b5563" stroke-width="0.5"/><text x="5" y="20" fill="#d1d5db">P</text>
+                             <line x1="20" y1="130" x2="180" y2="130" stroke="#4b5563" stroke-width="0.5"/><text x="175" y="140" fill="#d1d5db">Q</text>
+                             <path d="M 30 110 L 170 30" stroke="#0ea5e9" fill="none" stroke-width="1.5"/><text x="150" y="28" fill="#0ea5e9" font-size="7">DA (Demanda c/ Info Perfeita)</text>
+                             <path d="M 30 40 L 170 120" stroke="#f87171" fill="none" stroke-width="1.5"/><text x="150" y="125" fill="#f87171" font-size="7">OA (Oferta de carros bons)</text>
+                             <path d="M 30 90 L 170 10" stroke="#0ea5e9" stroke-dasharray="2,2" fill="none" stroke-width="1.5"/><text x="130" y="8" fill="#0ea5e9" font-size="7">DM (Demanda com Incerteza)</text>
+                             <path d="M 80 60 L 90 50" stroke="#111827" fill="none" stroke-width="1" marker-end="url(#arrow2)"/>
+                             <defs><marker id="arrow2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111827"/></marker></defs>
+                             <text x="30" y="65" font-size="6" fill="#111827">Incerteza sobre qualidade reduz a demanda</text>
+                        </svg>
+                        <p class="caption">A incerteza sobre a qualidade desloca a curva de demanda para baixo (de DA para DM), reduzindo o preço e a quantidade de equilíbrio para carros de alta qualidade, potencialmente eliminando o mercado.</p>
+                    </div>
+                    <div class="chart-container mt-4">
+                        <div class="w-full max-w-lg">
+                            <h4 class="text-xl font-semibold text-white mb-2 text-center">Calculadora Interativa: O Preço do "Lemon"</h4>
+                            <p class="text-sm text-gray-300 mb-4 text-center">Veja como a probabilidade de um carro ser de baixa qualidade afeta o preço que um comprador está disposto a pagar.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div><label for="pBom" class="block text-sm font-medium">Valor de um carro bom ($)</label><input type="number" id="pBom" value="40000"></div>
+                                <div><label for="pRuim" class="block text-sm font-medium">Valor de um carro ruim ($)</label><input type="number" id="pRuim" value="20000"></div>
+                                <div class="md:col-span-2"><label for="probRuim" class="block text-sm font-medium">Sua estimativa da chance de ser um carro ruim (%)</label><input type="range" id="probRuim" min="0" max="100" value="50"><span id="probRuimLabel" class="text-blue-300 ml-2">50%</span></div>
+                            </div>
+                            <div id="lemonResult" class="mt-4 text-lg font-semibold text-white text-center p-3 bg-gray-800 rounded-lg"></div>
+                        </div>
+                    </div>
+
+                    <h3>Risco Moral (Moral Hazard) e o Problema Agente-Principal</h3>
+                    <p>O Risco Moral ocorre <strong>após</strong> a transação, devido a ações ocultas. Uma parte (o agente) muda seu comportamento para pior porque a outra parte (o principal) arcará com as consequências negativas. Isso está no cerne do <strong>Problema Agente-Principal</strong>.</p>
+                    <ul class="list-disc list-inside space-y-2 mt-4">
+                        <li><strong>Principal:</strong> A parte que contrata. Ex: Acionistas de uma empresa, seguradora.</li>
+                        <li><strong>Agente:</strong> A parte contratada para agir em nome do principal. Ex: CEO, segurado.</li>
+                    </ul>
+                    <p>O problema surge porque os interesses do principal e do agente não estão perfeitamente alinhados, e o principal não pode observar perfeitamente as ações (o esforço) do agente. Exemplo clássico: um segurado pode dirigir de forma mais imprudente ou se preocupar menos com roubo, pois a seguradora cobre as perdas. Uma firma pode não conseguir saber se um mau resultado de vendas foi devido a um baixo esforço do vendedor ou a um mercado ruim.</p>
+                    
+                    <h3>Soluções para Assimetria de Informação</h3>
+                    <p>Os mercados desenvolveram vários mecanismos para mitigar os problemas de seleção adversa e risco moral:</p>
+                    <table class="table-auto">
+                        <thead><tr><th>Mecanismo</th><th>Descrição</th><th>Exemplo Prático</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sinalização (Signaling)</strong></td>
+                                <td>A parte informada (agente) toma uma ação custosa para sinalizar sua qualidade oculta à parte não informada. O sinal deve ser mais custoso para os tipos de baixa qualidade.</td>
+                                <td>Obter um diploma universitário caro para sinalizar alta produtividade (Modelo de Spence); uma empresa gastar muito em publicidade para sinalizar que pretende ficar no mercado por muito tempo.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Triagem (Screening)</strong></td>
+                                <td>A parte não informada (principal) cria mecanismos (ex: um menu de contratos) para que a outra parte revele sua informação privada através da escolha que faz.</td>
+                                <td>Seguradoras oferecem planos com diferentes franquias e prêmios. Clientes de baixo risco escolhem franquias altas e prêmios baixos; clientes de alto risco preferem o oposto.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reputação e Garantias</strong></td>
+                                <td>Vendedores constroem uma reputação de qualidade ao longo do tempo ou oferecem garantias para sinalizar confiança no produto e reduzir o risco do comprador.</td>
+                                <td>Marcas consolidadas (Coca-Cola, Apple); garantia de 90 dias para produtos eletrônicos.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contratos de Incentivo</strong></td>
+                                <td>O principal desenha um contrato que alinha os interesses do agente com os seus. Usado principalmente para combater o risco moral.</td>
+                                <td>Pagar comissões de vendas para vendedores; oferecer bônus e opções de ações para executivos com base no desempenho da empresa.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>Exemplo Detalhado: Modelo de Sinalização de Spence</h4>
+                    <p>Considere dois grupos de trabalhadores, Grupo 1 (baixa produtividade, PMg = $10.000) e Grupo 2 (alta produtividade, PMg = $20.000). A firma não consegue distingui-los. O custo de obter 'y' anos de educação é maior para o grupo de baixa produtividade: C1(y) = 4.000 * y para G1 e C2(y) = 2.000 * y para G2. O benefício de ser percebido como G2 é um salário $10.000 maior. Como a educação pode funcionar como um sinal?</p>
+                    <ul class="list-disc list-inside space-y-2 mt-2">
+                        <li><strong>Análise Custo-Benefício para G1:</strong> Compensa estudar se Benefício > Custo. $10.000 > 4.000 * y => y < 2.5 anos. G1 não estudará 2.5 anos ou mais, pois o custo superaria o ganho salarial.</li>
+                        <li><strong>Análise Custo-Benefício para G2:</strong> Compensa estudar se Benefício > Custo. $10.000 > 2.000 * y => y < 5 anos. G2 está disposto a estudar até 5 anos para provar sua qualidade.</li>
+                        <li><strong>Sinalização Eficaz (Equilíbrio Separador):</strong> A firma pode estabelecer um requisito de educação y* tal que <strong>2.5 ≤ y* < 5</strong>. Por exemplo, se a firma exigir y* = 3 anos de educação para pagar o salário alto, apenas os trabalhadores do G2 acharão vantajoso cumprir o requisito. Assim, eles se separam dos trabalhadores de G1 e sinalizam com sucesso sua alta produtividade. A educação, nesse modelo, não aumenta a produtividade, apenas a revela.</li>
+                    </ul>
+                </section>
+            </div>
+
+            <div id="poder-mercado" class="tab-panel">
+                <section class="content-section">
+                    <h2>Poder de Mercado: Monopólio e Oligopólio</h2>
+                    <p>Em contraste com a concorrência perfeita, onde as firmas são tomadoras de preço, em muitas indústrias as firmas possuem <strong>poder de mercado</strong> — a capacidade de influenciar o preço de um bem. Estudamos aqui as estruturas de monopólio e oligopólio.</p>
+
+                    <h3>Monopólio</h3>
+                    <p>Um monopólio é uma estrutura de mercado com um único vendedor. A fonte do poder de monopólio pode ser o controle de um recurso chave, patentes, ou economias de escala (monopólio natural).</p>
+                    <h4>Maximização de Lucro do Monopolista</h4>
+                    <p>O monopolista enfrenta a curva de demanda do mercado inteiro. Para vender mais, ele precisa baixar o preço. Sua Receita Marginal (RMg) é, portanto, sempre menor que o preço. A regra de maximização de lucro é a mesma de qualquer firma: produzir a quantidade Q* onde a <strong>Receita Marginal (RMg) iguala o Custo Marginal (CMg)</strong>. O preço (P*) é então determinado pela altura da curva de demanda para essa quantidade Q*.</p>
+                    <div class="formula">RMg = CMg</div>
+                    <div class="chart-container">
+                        <svg viewBox="0 0 200 150">
+                            <title>Maximização de Lucro do Monopolista</title>
+                            <line x1="20" y1="10" x2="20" y2="130" stroke="#4b5563" stroke-width="0.5"/><text x="5" y="15" fill="#d1d5db">P, Custo</text>
+                            <line x1="20" y1="130" x2="190" y2="130" stroke="#4b5563" stroke-width="0.5"/><text x="185" y="140" fill="#d1d5db">Q</text>
+                            <path d="M 30 120 L 170 30" stroke="#60a5fa" fill="none" stroke-width="1.5"/><text x="160" y="25" fill="#60a5fa">Demanda (P)</text>
+                            <path d="M 30 120 L 100 0" stroke="#a5b4fc" fill="none" stroke-width="1.5"/><text x="102" y="10" fill="#a5b4fc">RMg</text>
+                            <path d="M 20 40 C 60 30, 120 70, 180 90" stroke="#fbbf24" fill="none" stroke-width="1.5"/><text x="160" y="95" fill="#fbbf24">CMg</text>
+                            <line x1="80" y1="58" x2="80" y2="130" stroke-dasharray="2,2" stroke="#9ca3af" stroke-width="0.5"/><text x="75" y="140" fill="#d1d5db">Q*</text>
+                            <line x1="80" y1="85" x2="0" y2="85" stroke-dasharray="2,2" stroke="#9ca3af" stroke-width="0.5"/><text x="5" y="83" fill="#d1d5db">P*</text>
+                            <circle cx="80" cy="58" r="1.5" fill="#e11d48"/> <text x="83" y="56" fill="#e11d48" font-size="6">RMg=CMg</text>
+                        </svg>
+                        <p class="caption">O monopolista encontra Q* onde RMg = CMg, e então sobe até a curva de demanda para encontrar o preço P* que os consumidores estão dispostos a pagar.</p>
+                    </div>
+                    <h4>O Custo Social do Monopólio</h4>
+                    <p>Como P > CMg no monopólio, o resultado é ineficiente. O monopolista produz menos e cobra mais do que seria em um mercado competitivo (onde P = CMg). Isso cria um <strong>peso-morto</strong>, representando o valor que a sociedade perde porque transações mutuamente benéficas não ocorrem.</p>
+
+                    <h3>Discriminação de Preços</h3>
+                    <p>É a prática de cobrar preços diferentes a consumidores diferentes pelo mesmo bem, não justificada por diferenças de custo. Para ser possível, a firma deve ter poder de mercado e ser capaz de impedir a revenda.</p>
+                    <table class="table-auto">
+                        <thead><tr><th>Tipo</th><th>Descrição</th><th>Exemplo</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>1º Grau (Perfeita)</strong></td><td>Cobrar de cada consumidor o máximo que ele está disposto a pagar (seu preço de reserva). Extrai todo o excedente do consumidor.</td><td>(Raro) Leilões perfeitamente desenhados, negociações individuais.</td></tr>
+                            <tr><td><strong>2º Grau</strong></td><td>Cobrar preços diferentes por quantidades diferentes (preços por bloco).</td><td>Contas de luz ou água com tarifas diferentes por faixa de consumo; descontos por comprar em grande quantidade.</td></tr>
+                            <tr><td><strong>3º Grau</strong></td><td>Dividir os consumidores em grupos com diferentes curvas de demanda e cobrar preços diferentes de cada grupo.</td><td>Descontos para estudantes ou idosos no cinema; preços diferentes para o mesmo voo dependendo da antecedência da compra.</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Oligopólio</h3>
+                    <p>Estrutura de mercado com poucas firmas, onde as ações de uma firma afetam significativamente as outras. Há uma tensão fundamental entre a cooperação (agir como um monopolista) e o interesse próprio (competir por mais fatia de mercado). Os modelos de oligopólio analisam essa interação estratégica.</p>
+                </section>
+            </div>
+
+            <div id="teoria-jogos" class="tab-panel">
+                <section class="content-section">
+                    <h2>Teoria dos Jogos</h2>
+                    <p>A Teoria dos Jogos é a ferramenta usada para analisar o comportamento estratégico de agentes (jogadores) cujas decisões se influenciam mutuamente. É a base para entender o oligopólio e muitas outras situações econômicas e sociais.</p>
+
+                    <h3>Elementos de um Jogo</h3>
+                    <ul class="list-disc list-inside space-y-2 mt-2 mb-4">
+                        <li><strong>Jogadores:</strong> Os tomadores de decisão.</li>
+                        <li><strong>Estratégias:</strong> As ações possíveis que cada jogador pode tomar.</li>
+                        <li><strong>Payoffs:</strong> Os resultados ou recompensas que cada jogador recebe para cada combinação de estratégias.</li>
+                    </ul>
+
+                    <h3>Jogos Simultâneos e o Equilíbrio de Nash</h3>
+                    <p>Em jogos simultâneos, os jogadores escolhem suas estratégias ao mesmo tempo, sem saber a escolha do outro. A solução para esses jogos é o <strong>Equilíbrio de Nash</strong>.</p>
+                    <p>Um conjunto de estratégias é um Equilíbrio de Nash se, dada a estratégia do outro jogador, nenhum jogador tem incentivo para mudar sua própria estratégia unilateralmente. Ou seja, cada jogador está fazendo o melhor que pode, dadas as escolhas dos outros.</p>
+
+                    <h4>Exemplo Clássico: O Dilema dos Prisioneiros</h4>
+                    <p>Dois suspeitos são presos e interrogados em salas separadas. Eles podem Confessar ou Negar. Os payoffs (em anos de prisão) são mostrados na matriz. A estratégia dominante para ambos é Confessar. O Equilíbrio de Nash é (Confessar, Confessar), mesmo que ambos ficassem em melhor situação se cooperassem e negassem.</p>
+                    <div class="game-matrix-container">
+                        <table class="game-matrix">
+                            <caption>Dilema dos Prisioneiros</caption>
+                            <thead>
+                                <tr>
+                                    <th colspan="2" rowspan="2"></th>
+                                    <th colspan="2">Prisioneiro B</th>
+                                </tr>
+                                <tr>
+                                    <th>Confessar</th>
+                                    <th>Negar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th rowspan="2"><span>Prisioneiro A</span></th>
+                                    <th>Confessar</th>
+                                    <td>(-8, -8)</td>
+                                    <td>(0, -10)</td>
+                                </tr>
+                                <tr>
+                                    <th>Negar</th>
+                                    <td>(-10, 0)</td>
+                                    <td>(-1, -1)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Modelos Clássicos de Oligopólio (Teoria dos Jogos Aplicada)</h3>
+                    <table class="table-auto">
+                        <thead><tr><th>Modelo</th><th>Variável de Escolha</th><th>Resumo e Resultado</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Cournot (1838)</strong></td><td>Quantidade</td><td>As firmas escolhem suas quantidades de produção simultaneamente. O preço de mercado é determinado pela quantidade total. O resultado é intermediário entre monopólio e concorrência perfeita (P > CMg, mas lucro menor que o de monopólio).</td></tr>
+                            <tr><td><strong>Bertrand (1883)</strong></td><td>Preço</td><td>As firmas escolhem seus preços simultaneamente. Com bens homogêneos, a competição de preços leva ao resultado de concorrência perfeita, onde <strong>P = CMg</strong> e o lucro é zero. Isso é conhecido como o Paradoxo de Bertrand.</td></tr>
+                            <tr><td><strong>Stackelberg (1934)</strong></td><td>Quantidade (Sequencial)</td><td>É um jogo sequencial. Uma firma (a líder) escolhe sua quantidade primeiro. A outra (a seguidora) observa a escolha da líder e então escolhe sua quantidade. A líder tem a "vantagem do primeiro movimento" e produz mais, obtendo um lucro maior.</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Jogos Sequenciais e Indução Retroativa</h3>
+                    <p>Em jogos sequenciais, os jogadores tomam suas decisões em uma ordem específica. Eles são representados por uma <strong>árvore de jogo</strong>. A ferramenta para resolvê-los é a <strong>indução retroativa (backward induction)</strong>: começamos do final do jogo e determinamos a melhor ação do último jogador. Então, voltamos um passo e, sabendo como o último jogador reagirá, determinamos a melhor ação do jogador anterior, e assim por diante, até o início do jogo.</p>
+                </section>
+            </div>
+
+            <div id="exercicios" class="tab-panel">
+                <section class="content-section">
+                    <h2>Exercícios Resolvidos e Sugestões</h2>
+                    <p>A prática é fundamental. Aqui você encontra a resolução detalhada de exercícios-chave de cada tema.</p>
+
+                    <h3>Tema: Equilíbrio Geral (Baseado na Lista 8)</h3>
+                    <div class="exercise-block">
+                        <h4>Exercício Chave (Eficiência nas Trocas)</h4>
+                        <p><strong>Enunciado:</strong> Suponha uma economia com dois consumidores, Karen e James, e dois bens, comida (F) e vestuário (C). A dotação inicial é: Karen tem 7F e 1C; James tem 3F e 5C. A TMS(C por F) de Karen é 3, e a TMS de James é 1/2. a) Desenhe a Caixa de Edgeworth. b) A alocação é eficiente? Por quê? c) Proponha uma troca que melhore o bem-estar de ambos.</p>
+                        <div class="solution">
+                            <p><strong>a) Caixa de Edgeworth:</strong> A caixa terá 10 unidades de Comida no eixo horizontal (7+3) e 6 unidades de Vestuário no eixo vertical (1+5).</p>
+                            <p><strong>b) Eficiência:</strong> <strong>Não, a alocação não é eficiente.</strong> A condição para eficiência é TMS_Karen = TMS_James. Aqui, 3 ≠ 1/2. Isso significa que eles valoram os bens de forma diferente na margem, abrindo espaço para trocas vantajosas.</p>
+                            <p class="mt-2"><strong>c) Proposta de Troca:</strong> Karen está disposta a ceder 3 unidades de vestuário por 1 unidade de comida (sua TMS é 3). James está disposto a ceder 1/2 unidade de vestuário por 1 de comida (ou, equivalentemente, está disposto a dar 2 unidades de comida por 1 de vestuário).<br>
+                            <strong>Sugestão:</strong> Karen dá 1 unidade de Vestuário para James em troca de 1 unidade de Comida.<br>
+                            <strong>Análise para Karen:</strong> Ela estava disposta a ceder até 3 V por 1 C, mas cedeu apenas 1 V. Ela está melhor.<br>
+                            <strong>Análise para James:</strong> Ele estava disposto a ceder até 2 C por 1 V, e recebeu exatamente 1 V por 1 C. Ele está melhor.
+                            <br><strong>Conclusão:</strong> A troca é mutuamente benéfica. Qualquer taxa de troca entre as suas TMS (entre 1/2 e 3) funcionaria.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="mt-8">Tema: Externalidades (Baseado na Lista 10)</h3>
+                    <div class="exercise-block">
+                        <h4>Exercício Chave (Imposto de Pigou)</h4>
+                        <p><strong>Enunciado:</strong> A produção de aço tem um Custo Privado Marginal (CPM) dado por CPM = 10 + Q. A demanda por aço é P = 100 - Q. A poluição gerada causa um Custo Externo Marginal (CEM) de CEM = Q. Calcule: a) O equilíbrio de mercado (privado). b) O nível de produção socialmente ótimo. c) O imposto de Pigou necessário. d) O peso-morto sem o imposto.</p>
+                        <div class="solution">
+                            <p><strong>a) Equilíbrio Privado:</strong> Ocorre quando Demanda (P) = Custo Privado (CPM).</p>
+                            <div class="formula">100 - Q = 10 + Q  =>  90 = 2Q  =>  <strong>Q_privado = 45</strong>. O preço será P = 100 - 45 = $55.</div>
+                            <p class="mt-2"><strong>b) Equilíbrio Socialmente Ótimo:</strong> Ocorre quando Demanda (P) = Custo Social (CSM). Primeiro, calculamos o CSM:</p>
+                            <div class="formula">CSM = CPM + CEM = (10 + Q) + Q = 10 + 2Q</div>
+                            <p>Agora, igualamos Demanda e CSM:</p>
+                            <div class="formula">100 - Q = 10 + 2Q  =>  90 = 3Q  =>  <strong>Q* = 30</strong></div>
+                            <p class="mt-2"><strong>c) Imposto de Pigou (t):</strong> O imposto ótimo deve ser igual ao Custo Externo Marginal (CEM) no nível de produção eficiente (Q* = 30).</p>
+                            <div class="formula">t = CEM(Q*) = Q* =>  <strong>t = $30 por unidade</strong></div>
+                            <p class="mt-2"><strong>d) Peso-Morto:</strong> É a área do triângulo formado pela diferença entre CSM e Demanda, entre a quantidade ótima (30) e a privada (45).<br>
+                            - Base do triângulo = Q_priv - Q* = 45 - 30 = 15.<br>
+                            - Altura do triângulo = CSM(Q*) - P(Q*) = (10+2*30) - (100-30) -> A altura é o valor do imposto, t = $30.
+                            </p>
+                            <div class="formula">Área = 0.5 * Base * Altura = 0.5 * (45 - 30) * 30 = 0.5 * 15 * 30 = <strong>$225</strong></div>
+                        </div>
+                    </div>
+
+                    <h3 class="mt-8">Tema: Monopólio</h3>
+                    <div class="exercise-block">
+                        <h4>Exercício Chave (Maximização de Lucro)</h4>
+                        <p><strong>Enunciado:</strong> Um monopolista enfrenta a curva de demanda P = 120 - 2Q. Seu custo total é C(Q) = 10Q + Q². Encontre a quantidade, o preço e o lucro do monopolista.</p>
+                        <div class="solution">
+                            <p><strong>1. Encontrar Receita Marginal (RMg) e Custo Marginal (CMg):</strong></p>
+                            <p>- Receita Total (RT) = P * Q = (120 - 2Q) * Q = 120Q - 2Q². A RMg é a derivada da RT em relação a Q.</p>
+                            <div class="formula">RMg = d(RT)/dQ = 120 - 4Q</div>
+                            <p>- Custo Marginal (CMg) é a derivada do Custo Total (CT) em relação a Q.</p>
+                            <div class="formula">CMg = d(CT)/dQ = 10 + 2Q</div>
+                            <p><strong>2. Igualar RMg e CMg para achar Q*:</strong></p>
+                            <div class="formula">120 - 4Q = 10 + 2Q  =>  110 = 6Q  =>  <strong>Q* ≈ 18.33</strong></div>
+                            <p><strong>3. Encontrar o Preço (P*) na curva de demanda:</strong></p>
+                            <div class="formula">P* = 120 - 2 * (18.33) = 120 - 36.66 = <strong>$83.34</strong></div>
+                            <p><strong>4. Calcular o Lucro (π):</strong></p>
+                            <div class="formula">Lucro (π) = RT - CT = (P* * Q*) - (10Q* + Q*²)<br>
+                            π = (83.34 * 18.33) - (10*18.33 + 18.33²) = 1524.72 - (183.3 + 335.99) = 1524.72 - 519.29 = <strong>$1005.43</strong></div>
+                        </div>
+                    </div>
+
+                    <h3 class="mt-8">Tema: Teoria dos Jogos</h3>
+                    <div class="exercise-block">
+                        <h4>Exercício Chave (Equilíbrio de Nash)</h4>
+                        <p><strong>Enunciado:</strong> Duas empresas, Firm A e Firm B, decidem se fazem propaganda (P) ou não (NP). A matriz de payoffs (lucros) é a seguinte. Encontre o(s) Equilíbrio(s) de Nash.</p>
+                        <div class="game-matrix-container">
+                            <table class="game-matrix">
+                                <thead>
+                                    <tr><th colspan="2" rowspan="2"></th><th colspan="2">Firm B</th></tr>
+                                    <tr><th>Propaganda (P)</th><th>Não Propaganda (NP)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><th rowspan="2"><span>Firm A</span></th><th>Propaganda (P)</th><td>(10, 5)</td><td>(15, 0)</td></tr>
+                                    <tr><th>Não Propaganda (NP)</th><td>(6, 8)</td><td>(20, 2)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="solution">
+                            <p>Usaremos o método de "verificar cada célula" ou "sublinhar o melhor resultado".</p>
+                            <p><strong>1. Análise da Firm A (olhando as linhas):</strong></p>
+                            <ul class="list-disc list-inside">
+                                <li>Se a Firm B escolher P, a Firm A compara 10 (se escolher P) com 6 (se escolher NP). A melhor escolha é <strong>P (10 > 6)</strong>.</li>
+                                <li>Se a Firm B escolher NP, a Firm A compara 15 (se escolher P) com 20 (se escolher NP). A melhor escolha é <strong>NP (20 > 15)</strong>.</li>
+                            </ul>
+                            <p><strong>2. Análise da Firm B (olhando as colunas):</strong></p>
+                            <ul class="list-disc list-inside">
+                                <li>Se a Firm A escolher P, a Firm B compara 5 (se escolher P) com 0 (se escolher NP). A melhor escolha é <strong>P (5 > 0)</strong>.</li>
+                                <li>Se a Firm A escolher NP, a Firm B compara 8 (se escolher P) com 2 (se escolher NP). A melhor escolha é <strong>P (8 > 2)</strong>.</li>
+                            </ul>
+                            <p><strong>3. Encontrando o Equilíbrio de Nash:</strong></p>
+                            <p>O Equilíbrio de Nash é a célula onde ambas as escolhas são a melhor resposta para o outro jogador. No nosso caso, é a célula onde ambos os payoffs seriam "sublinhados".</p>
+                            <div class="formula">O único Equilíbrio de Nash é quando a <strong>Firm A escolhe Propaganda</strong> e a <strong>Firm B escolhe Propaganda</strong>, com o payoff de <strong>(10, 5)</strong>.</div>
+                            <p>Note que a Firm B tem uma estratégia dominante (sempre escolher Propaganda), mas a Firm A não.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="glossario" class="tab-panel">
+                <section class="content-section">
+                    <h2>Glossário de Termos Essenciais</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="glossary-term"><p><strong>Assimetria de Informação:</strong> Situação em que uma parte em uma transação possui mais ou melhores informações do que a outra.</p></div>
+                        <div class="glossary-term"><p><strong>Bens Públicos:</strong> Bens que são não-rivais no consumo e não-excludentes.</p></div>
+                        <div class="glossary-term"><p><strong>Caixa de Edgeworth:</strong> Ferramenta gráfica usada para representar a distribuição de bens entre dois indivíduos ou a alocação de insumos entre dois processos de produção.</p></div>
+                        <div class="glossary-term"><p><strong>Curva de Contrato:</strong> O conjunto de todas as alocações eficientes de Pareto em uma Caixa de Edgeworth. Em qualquer ponto da curva de contrato, as TMS (ou TMST) dos agentes são iguais.</p></div>
+                        <div class="glossary-term"><p><strong>Custo Social Marginal (CSM):</strong> O custo total para a sociedade de produzir uma unidade adicional de um bem, igual ao custo privado marginal mais o custo externo marginal.</p></div>
+                        <div class="glossary-term"><p><strong>Dilema dos Prisioneiros:</strong> Um jogo canônico em teoria dos jogos que mostra por que dois indivíduos racionais podem não cooperar, mesmo que pareça do interesse deles fazê-lo.</p></div>
+                        <div class="glossary-term"><p><strong>Discriminação de Preços:</strong> A prática de vender o mesmo bem a preços diferentes para diferentes compradores.</p></div>
+                        <div class="glossary-term"><p><strong>Efeito de Feedback:</strong> O ajuste de preço ou quantidade em um mercado causado por ajustes de preço e quantidade em mercados relacionados.</p></div>
+                        <div class="glossary-term"><p><strong>Eficiência de Pareto (Ótimo de Pareto):</strong> Uma alocação em que não é possível melhorar o bem-estar de um indivíduo sem piorar o de outro.</p></div>
+                        <div class="glossary-term"><p><strong>Equilíbrio de Nash:</strong> Um conjunto de estratégias, uma para cada jogador, em que nenhum jogador tem incentivo para mudar sua estratégia unilateralmente.</p></div>
+                        <div class="glossary-term"><p><strong>Estratégia Dominante:</strong> Uma estratégia que é a melhor para um jogador, não importa o que os outros jogadores façam.</p></div>
+                        <div class="glossary-term"><p><strong>Externalidade:</strong> Um custo ou benefício gerado pela produção ou consumo que afeta terceiros e não é refletido nos preços de mercado.</p></div>
+                        <div class="glossary-term"><p><strong>Fronteira de Possibilidades de Produção (FPP):</strong> Gráfico que mostra as combinações de bens que uma economia pode produzir eficientemente com seus recursos e tecnologia existentes.</p></div>
+                        <div class="glossary-term"><p><strong>Imposto de Pigou:</strong> Um imposto aplicado a uma atividade que gera uma externalidade negativa, com o objetivo de corrigir o resultado do mercado.</p></div>
+                        <div class="glossary-term"><p><strong>Indução Retroativa (Backward Induction):</strong> Método de resolução de jogos sequenciais que envolve raciocinar do fim do jogo para o começo.</p></div>
+                        <div class="glossary-term"><p><strong>Monopólio:</strong> Mercado com apenas um vendedor.</p></div>
+                        <div class="glossary-term"><p><strong>Oligopólio:</strong> Mercado com um pequeno número de vendedores.</p></div>
+                        <div class="glossary-term"><p><strong>Problema Agente-Principal:</strong> Problema que surge quando uma parte (o principal) contrata outra (o agente) para realizar uma tarefa, mas os interesses de ambos não estão alinhados e as ações do agente não são totalmente observáveis.</p></div>
+                        <div class="glossary-term"><p><strong>Recursos de Propriedade Comum:</strong> Recursos que são não-excludentes, mas rivais no consumo, levando à Tragédia dos Comuns.</p></div>
+                        <div class="glossary-term"><p><strong>Risco Moral (Moral Hazard):</strong> A tendência de uma pessoa que está isolada do risco se comportar de maneira diferente (e geralmente mais arriscada) do que se estivesse totalmente exposta ao risco.</p></div>
+                        <div class="glossary-term"><p><strong>Seleção Adversa:</strong> Problema de mercado causado por assimetria de informação antes de um acordo ser fechado, onde os maus produtos ou clientes tendem a ser os selecionados.</p></div>
+                        <div class="glossary-term"><p><strong>Sinalização (Signaling):</strong> Ação tomada pela parte informada para revelar sua informação privada à parte não informada.</p></div>
+                        <div class="glossary-term"><p><strong>Taxa Marginal de Substituição (TMS):</strong> A taxa à qual um consumidor está disposto a trocar um bem por outro, mantendo o mesmo nível de utilidade. É a inclinação da curva de indiferença.</p></div>
+                        <div class="glossary-term"><p><strong>Taxa Marginal de Substituição Técnica (TMST):</strong> A taxa à qual uma firma pode substituir um insumo por outro sem alterar a produção. É a inclinação da isoquanta.</p></div>
+                        <div class="glossary-term"><p><strong>Taxa Marginal de Transformação (TMT):</strong> O custo de oportunidade de produzir uma unidade adicional de um bem, medido pela quantidade do outro bem que se deixa de produzir. É a inclinação da FPP.</p></div>
+                        <div class="glossary-term"><p><strong>Teorema de Coase:</strong> Proposição de que, se os direitos de propriedade forem bem definidos e os custos de transação nulos, a negociação privada levará a uma alocação eficiente.</p></div>
+                        <div class="glossary-term"><p><strong>Teoremas do Bem-Estar (Primeiro e Segundo):</strong> Teoremas fundamentais que ligam o equilíbrio de mercados competitivos à eficiência de Pareto.</p></div>
+                        <div class="glossary-term"><p><strong>Tragédia dos Comuns:</strong> O esgotamento de um recurso de propriedade comum devido à sobre-exploração por indivíduos que agem em seu próprio interesse.</p></div>
+                        <div class="glossary-term"><p><strong>Triagem (Screening):</strong> Ação tomada pela parte não informada para induzir a parte informada a revelar sua informação privada.</p></div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="text-center mt-10 pt-6 border-t border-gray-700">
+            <p class="text-gray-500">Criado para auxiliar nos estudos de Microeconomia II. Boa prova!</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- LÓGICA PARA AS ABAS DE NAVEGAÇÃO ---
+            const tabs = document.querySelectorAll('.tab-btn');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.getAttribute('data-target');
+
+                    // Desativa todas as abas e painéis
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabPanels.forEach(p => p.classList.remove('active'));
+
+                    // Ativa a aba e o painel clicados
+                    tab.classList.add('active');
+                    const targetPanel = document.getElementById(targetId);
+                    if(targetPanel) {
+                        targetPanel.classList.add('active');
+                    }
+                });
+            });
+            
+            // --- LÓGICA PARA A CALCULADORA INTERATIVA DO "LEMON PROBLEM" ---
+            const pBomInput = document.getElementById('pBom');
+            const pRuimInput = document.getElementById('pRuim');
+            const probRuimSlider = document.getElementById('probRuim');
+            const probRuimLabel = document.getElementById('probRuimLabel');
+            const resultDiv = document.getElementById('lemonResult');
+
+            function calculateLemonPrice() {
+                if (!pBomInput || !pRuimInput || !probRuimSlider || !resultDiv) return;
+                
+                const pBom = parseFloat(pBomInput.value);
+                const pRuim = parseFloat(pRuimInput.value);
+                const probRuim = parseFloat(probRuimSlider.value) / 100;
+                const probBom = 1 - probRuim;
+                
+                if (isNaN(pBom) || isNaN(pRuim)) {
+                    resultDiv.innerHTML = `<span class="text-red-400">Por favor, insira valores válidos.</span>`;
+                    return;
+                }
+                
+                const expectedPrice = (pBom * probBom) + (pRuim * probRuim);
+                
+                resultDiv.innerHTML = `Valor esperado (preço máximo a pagar): <span class="text-blue-300">$${expectedPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>`;
+                
+                // Lógica adicional para mostrar se o mercado funciona
+                if (expectedPrice < pBom) {
+                    resultDiv.innerHTML += `<br><span class="text-sm text-yellow-400 mt-2 block">Atenção: A este preço, vendedores de carros bons podem sair do mercado!</span>`;
+                } else {
+                     resultDiv.innerHTML += `<br><span class="text-sm text-green-400 mt-2 block">A este preço, ambos os tipos de carros são negociados.</span>`;
+                }
+            }
+            
+            const inputsToListen = [pBomInput, pRuimInput, probRuimSlider];
+            inputsToListen.forEach(input => {
+                if (input) {
+                    input.addEventListener('input', () => {
+                        if (input.type === 'range' && probRuimLabel) {
+                            probRuimLabel.textContent = `${input.value}%`;
+                        }
+                        calculateLemonPrice();
+                    });
+                }
+            });
+            
+            // Executa o cálculo uma vez na carga inicial da página
+            calculateLemonPrice();
+        });
+    </script>
+</body>
+</html>
