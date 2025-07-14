@@ -1,119 +1,140 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- =================================================================== -->
-    <!-- == METADADOS E CONFIGURAÇÕES ESSENCIAIS                           == -->
-    <!-- =================================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UFSCar - Microeconomia II - Guia Completo</title>
-    
-    <!-- Tailwind CSS para estilização rápida e responsiva -->
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fontes do Google para uma melhor tipografia -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- =================================================================== -->
-    <!-- == ESTILOS CSS CUSTOMIZADOS                                     == -->
-    <!-- =================================================================== -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+
     <style>
         /* Estilo base do corpo do site */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Fundo azul-escuro */
-            color: #d1d5db; /* Cor do texto principal (cinza claro) */
+            background-color: #0d1117; /* Fundo cinza-escuro, mais suave que preto */
+            color: #c9d1d9; /* Cor do texto principal (cinza claro) */
         }
         
+        /* Título principal com gradiente */
+        .gradient-text {
+            background: linear-gradient(to right, #58a6ff, #3d8bfd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
         /* Estilo dos botões das abas de navegação */
         .tab-btn {
-            padding: 1rem 1.5rem;
+            padding: 0.75rem 1.5rem;
             cursor: pointer;
             background-color: transparent;
             border: none;
-            color: #9ca3af; /* Cor do botão inativo */
-            font-weight: 500;
-            border-bottom: 3px solid transparent;
+            color: #8b949e; /* Cor do botão inativo */
+            font-weight: 600;
+            border-radius: 0.5rem;
             transition: all 0.3s ease;
+            margin-right: 0.5rem;
         }
         .tab-btn:hover {
-            color: #e5e7eb; /* Cor ao passar o mouse */
+            background-color: #161b22;
+            color: #c9d1d9;
         }
         .tab-btn.active {
-            color: #60a5fa; /* Cor do botão ativo (azul) */
-            border-bottom-color: #60a5fa;
+            color: #f0f6fc;
+            background-color: #3b82f6;
         }
-        
+
         /* Controle de visibilidade dos painéis das abas */
-        .tab-panel {
-            display: none;
-        }
-        .tab-panel.active {
-            display: block;
-        }
-        
-        /* Estilo padrão para as seções de conteúdo */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* Estilo padrão para as seções de conteúdo ("Cards") */
         .content-section {
-            background-color: #1f2937; /* Fundo da seção (mais claro que o body) */
+            background-color: #161b22; /* Fundo da seção */
+            border: 1px solid #30363d;
             border-radius: 0.75rem;
-            padding: 2rem;
+            padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+        .content-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+        }
+
         /* Títulos principais de cada seção */
         .content-section h2 {
-            color: #60a5fa;
-            border-bottom: 2px solid #3b82f6;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.875rem;
-            line-height: 2.25rem;
-            font-weight: 700;
+            color: #58a6ff;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            font-size: 2.25rem; /* Aumentado */
+            line-height: 2.5rem;
+            font-weight: 800;
         }
-        
+
         /* Subtítulos */
         .content-section h3 {
-            color: #93c5fd;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            line-height: 2rem;
-            font-weight: 600;
+            color: #79c0ff;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.75rem;
+            line-height: 2.25rem;
+            font-weight: 700;
         }
 
         /* Sub-subtítulos */
         .content-section h4 {
-            color: #a5b4fc;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
+            color: #a5d6ff;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
             font-size: 1.25rem;
             line-height: 1.75rem;
             font-weight: 600;
         }
         
-        /* Tabelas */
+        /* Parágrafos e listas */
+        p, ul {
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        ul {
+            list-style-position: inside;
+            list-style-type: disc;
+        }
+
+        /* Tabelas com design moderno */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
         th, td {
-            border: 1px solid #4b5563;
-            padding: 0.75rem;
+            border-bottom: 1px solid #30363d;
+            padding: 1rem 0.75rem;
             text-align: left;
         }
         th {
-            background-color: #374151;
-            color: #e5e7eb;
+            background-color: rgba(88, 166, 255, 0.1);
+            color: #c9d1d9;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
-        
+        tr:nth-child(even) {
+             background-color: rgba(13, 17, 23, 0.5);
+        }
+
         /* Container para os gráficos SVG */
         .chart-container {
-            background-color: #374151;
+            background-color: #0d1117;
             padding: 1.5rem;
+            border: 1px solid #30363d;
             border-radius: 0.5rem;
             margin-top: 1.5rem;
             display: flex;
@@ -131,83 +152,122 @@
             border-radius: 0.25rem;
         }
         .chart-container .caption {
-            color: #d1d5db;
+            color: #8b949e;
             margin-top: 1rem;
             font-style: italic;
             text-align: center;
             max-width: 550px;
         }
-        
+
         /* Estilo dos termos do glossário */
         .glossary-term {
-            background-color: #374151;
-            padding: 1rem;
+            background: linear-gradient(to right, rgba(88, 166, 255, 0.05), rgba(88, 166, 255, 0.1));
+            border-left: 4px solid #58a6ff;
+            padding: 1.25rem;
             border-radius: 0.5rem;
             margin-bottom: 1rem;
         }
         .glossary-term strong {
-            color: #60a5fa;
+            color: #79c0ff;
+            font-weight: 700;
         }
-        
+
         /* Estilo para botões e inputs da calculadora */
         .btn {
             background-color: #3b82f6;
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: background-color 0.3s;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
         }
         .btn:hover {
             background-color: #2563eb;
+            box-shadow: 0 6px 20px 0 rgb(0 118 255 / 23%);
+            transform: translateY(-2px);
         }
-        input[type=number], input[type=range] {
-            background-color: #4b5563;
-            border: 1px solid #6b7280;
-            color: #e5e7eb;
-            border-radius: 0.375rem;
-            padding: 0.5rem;
+        input[type=number] {
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
             width: 100%;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type=number]:focus {
+            outline: none;
+            border-color: #58a6ff;
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
         }
         input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #30363d;
+            border-radius: 5px;
+            outline: none;
             padding: 0;
+            margin-top: 0.5rem;
         }
-        
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #58a6ff;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #0d1117;
+        }
+        input[type=range]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #58a6ff;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #0d1117;
+        }
+
         /* Estilo para blocos de exercício */
         .exercise-block {
-            border-left: 4px solid #3b82f6;
-            padding-left: 1rem;
+            border: 1px solid #30363d;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
             margin-top: 1.5rem;
+            background-color: #0d1117;
         }
         .exercise-block .solution {
-            background-color: #161e2b;
-            padding: 1rem;
+            background-color: #161b22;
+            padding: 1.5rem;
             border-radius: 0.5rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            border: 1px solid #30363d;
         }
         .formula {
-            background-color: #161e2b;
-            padding: 0.75rem;
+            background-color: #0d1117;
+            padding: 1rem;
             border-radius: 0.5rem;
             margin: 1rem 0;
             font-family: 'Courier New', Courier, monospace;
-            color: #a5b4fc;
+            color: #a5d6ff;
+            border: 1px solid #30363d;
+            overflow-x: auto;
         }
     </style>
 </head>
 <body class="antialiased">
-    <!-- =================================================================== -->
-    <!-- == CONTAINER PRINCIPAL                                            == -->
-    <!-- =================================================================== -->
     <div class="container mx-auto p-4 md:p-8">
-        <!-- Cabeçalho -->
-        <header class="text-center mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold text-blue-400">UFSCar - Microeconomia II</h1>
+        <header class="text-center mb-12">
+            <h1 class="text-5xl md:text-7xl font-extrabold gradient-text">Microeconomia II</h1>
+            <p class="text-gray-400 text-lg mt-2">Um Guia Completo para os Tópicos da UFSCar</p>
         </header>
 
-        <!-- Navegação por Abas -->
-        <div class="border-b border-gray-700 mb-8">
-            <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
+        <div class="mb-8 flex justify-center">
+            <nav class="flex flex-wrap p-2 bg-[#161b22] border border-[#30363d] rounded-lg" aria-label="Tabs">
                 <button class="tab-btn active" data-target="equilibrio-geral">Equilíbrio Geral</button>
                 <button class="tab-btn" data-target="externalidades">Externalidades</button>
                 <button class="tab-btn" data-target="assimetria">Assimetria de Informação</button>
@@ -216,11 +276,7 @@
             </nav>
         </div>
 
-        <!-- Conteúdo Principal das Abas -->
         <main id="tab-content">
-            <!-- =================================================================== -->
-            <!-- == ABA 1: EQUILÍBRIO GERAL E EFICIÊNCIA ECONÔMICA                == -->
-            <!-- =================================================================== -->
             <div id="equilibrio-geral" class="tab-panel active">
                 <section class="content-section">
                     <h2>Equilíbrio Geral e Eficiência Econômica</h2>
@@ -231,7 +287,6 @@
                     <div class="chart-container">
                         <svg viewBox="0 0 200 150">
                             <title>Efeito de Feedback de um Imposto</title>
-                            <!-- Margarine Market -->
                             <text x="25" y="10" font-size="8" font-weight="bold" fill="#111827">a) Mercado de Margarina</text>
                             <path d="M 10 100 L 90 20" stroke="#0ea5e9" fill="none" stroke-width="1.5"/> <text x="70" y="18" fill="#0ea5e9" font-size="7">Dmg</text>
                             <path d="M 10 30 L 90 110" stroke="#0ea5e9" fill="none" stroke-width="1.5"/> <text x="70" y="115" fill="#0ea5e9" font-size="7">Omg1</text>
@@ -239,15 +294,13 @@
                             <circle cx="50" cy="65" r="1.5" fill="#111827"/> <text x="30" y="68" fill="#111827" font-size="6">Eq. Parcial</text>
                             <circle cx="58" cy="85" r="2" fill="#e11d48"/> <text x="62" y="88" fill="#e11d48" font-size="6">Eq. Geral (B)</text>
                             
-                            <!-- Butter Market -->
-                             <text x="120" y="10" font-size="8" font-weight="bold" fill="#111827">b) Mercado de Manteiga</text>
+                            <text x="120" y="10" font-size="8" font-weight="bold" fill="#111827">b) Mercado de Manteiga</text>
                             <path d="M 110 110 L 190 30" stroke="#0ea5e9" fill="none" stroke-width="1.5"/> <text x="170" y="28" fill="#0ea5e9" font-size="7">Dmt1</text>
                             <path d="M 110 120 L 190 40" stroke="#111827" fill="none" stroke-width="1.5"/> <text x="170" y="38" fill="#111827" font-size="7">Dmt2</text>
                             <path d="M 110 130 L 190 50" stroke="#f87171" fill="none" stroke-width="1.5"/> <text x="170" y="48" fill="#f87171" font-size="7">Dmt*</text>
                             <path d="M 110 30 L 190 110" stroke="#0ea5e9" fill="none" stroke-width="1.5"/> <text x="170" y="115" fill="#0ea5e9" font-size="7">Omt</text>
                             <circle cx="158" cy="79" r="2" fill="#e11d48"/> <text x="162" y="82" fill="#e11d48" font-size="6">Eq. Geral (A)</text>
                             
-                            <!-- Arrows and markers for SVG -->
                             <path d="M 95 60 L 105 60" stroke="#111827" fill="none" stroke-width="1" marker-end="url(#arrow)"/>
                             <path d="M 105 90 L 95 90" stroke="#111827" fill="none" stroke-width="1" marker-end="url(#arrow)"/>
                             <defs><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111827"/></marker></defs>
@@ -299,19 +352,14 @@
                     <div class="chart-container">
                         <svg viewBox="0 0 200 150">
                             <title>Ganhos de Comércio</title>
-                            <!-- FPP -->
                             <path d="M 30 110 C 70 105, 110 70, 130 30" stroke="#fbbf24" fill="none" stroke-width="2"/>
                             <text x="80" y="90" fill="#fbbf24" font-size="8">FPP</text>
-                            <!-- Production Point -->
                             <circle cx="110" cy="65" r="1.5" fill="#111827"/>
                             <text x="90" y="63" fill="#111827" font-size="7">Produção</text>
-                            <!-- Consumption Point -->
                             <circle cx="90" cy="85" r="1.5" fill="#e11d48"/>
                             <text x="65" y="83" fill="#e11d48" font-size="7">Consumo</text>
-                            <!-- Trade Line -->
                             <line x1="40" y1="130" x2="160" y2="40" stroke="#34d399" stroke-width="1.5" stroke-dasharray="2,2"/>
                             <text x="135" y="35" fill="#34d399" font-size="7">Linha de Preço Mundial</text>
-                            <!-- CI -->
                             <path d="M 50 120 C 70 90, 100 75, 130 70" stroke="#60a5fa" fill="none" stroke-width="1.5"/>
                             <text x="110" y="68" fill="#60a5fa" font-size="7">CI (pós-comércio)</text>
                         </svg>
@@ -320,9 +368,6 @@
                 </section>
             </div>
 
-            <!-- =================================================================== -->
-            <!-- == ABA 2: EXTERNALIDADES E DIREITOS DE PROPRIEDADE                == -->
-            <!-- =================================================================== -->
             <div id="externalidades" class="tab-panel">
                 <section class="content-section">
                     <h2>Externalidades e Direitos de Propriedade</h2>
@@ -392,9 +437,6 @@
                 </section>
             </div>
 
-            <!-- =================================================================== -->
-            <!-- == ABA 3: ASSIMETRIA DE INFORMAÇÃO                                == -->
-            <!-- =================================================================== -->
             <div id="assimetria" class="tab-panel">
                 <section class="content-section">
                     <h2>Assimetria de Informação</h2>
@@ -417,17 +459,23 @@
                         </svg>
                         <p class="caption">A incerteza sobre a qualidade desloca a curva de demanda para baixo, reduzindo o preço e a quantidade de equilíbrio para carros de alta qualidade.</p>
                     </div>
-                    <div class="chart-container mt-4">
+                    <div class="chart-container mt-8">
                         <div class="w-full max-w-lg">
                             <h4 class="text-xl font-semibold text-white mb-2 text-center">Calculadora Interativa: O Preço do "Lemon"</h4>
-                            <p class="text-sm text-gray-300 mb-4 text-center">Veja como a probabilidade de um carro ser de baixa qualidade afeta o preço que um comprador está disposto a pagar.</p>
+                            <p class="text-sm text-gray-400 mb-6 text-center">Veja como a probabilidade de um carro ser de baixa qualidade afeta o preço que um comprador está disposto a pagar.</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div><label for="pBom" class="block text-sm font-medium">Preço por carro bom ($)</label><input type="number" id="pBom" value="40000"></div>
-                                <div><label for="pRuim" class="block text-sm font-medium">Preço por carro ruim ($)</label><input type="number" id="pRuim" value="20000"></div>
-                                <div class="md:col-span-2"><label for="probRuim" class="block text-sm font-medium">Probabilidade de ser um carro ruim (%)</label><input type="range" id="probRuim" min="0" max="100" value="50"><span id="probRuimLabel" class="text-blue-300 ml-2">50%</span></div>
+                                <div><label for="pBom" class="block text-sm font-medium mb-1 text-gray-400">Preço por carro bom (R$)</label><input type="number" id="pBom" value="40000"></div>
+                                <div><label for="pRuim" class="block text-sm font-medium mb-1 text-gray-400">Preço por carro ruim (R$)</label><input type="number" id="pRuim" value="20000"></div>
+                                <div class="md:col-span-2">
+                                    <label for="probRuim" class="block text-sm font-medium mb-1 text-gray-400">Probabilidade de ser um carro ruim</label>
+                                    <div class="flex items-center gap-4">
+                                        <input type="range" id="probRuim" min="0" max="100" value="50">
+                                        <span id="probRuimLabel" class="text-blue-400 font-semibold text-lg">50%</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mt-4 text-center"><button id="calculateLemonPrice" class="btn">Calcular Preço Médio</button></div>
-                            <div id="lemonResult" class="mt-4 text-lg font-semibold text-white text-center"></div>
+                            <div class="mt-6 text-center"><button id="calculateLemonPrice" class="btn">Calcular Preço Médio</button></div>
+                            <div id="lemonResult" class="mt-6 text-lg font-semibold text-white text-center p-4 bg-[#0d1117] rounded-lg border border-[#30363d]"></div>
                         </div>
                     </div>
 
@@ -435,7 +483,7 @@
                     <p>Ocorre <strong>após</strong> a transação. Uma parte muda seu comportamento para pior porque a outra parte arcará com as consequências. Exemplo clássico: uma pessoa com seguro de carro pode dirigir de forma mais imprudente ou se preocupar menos com roubo, pois a seguradora cobre as perdas.</p>
                     
                     <h3>Soluções para Assimetria de Informação</h3>
-                    <ul class="list-disc list-inside space-y-2 mt-4">
+                    <ul class="space-y-3 mt-4">
                         <li><strong>Sinalização (Signaling):</strong> A parte informada toma uma ação para sinalizar sua qualidade. Ex: obter um diploma universitário para sinalizar alta produtividade (Modelo de Spence). O sinal deve ser mais custoso para os tipos de baixa qualidade.</li>
                         <li><strong>Triagem (Screening):</strong> A parte não informada cria mecanismos para que a outra parte revele sua informação. Ex: seguradoras oferecem planos com diferentes franquias e prêmios.</li>
                         <li><strong>Reputação e Garantias:</strong> Vendedores constroem uma reputação de qualidade ao longo do tempo ou oferecem garantias para sinalizar confiança no produto.</li>
@@ -443,7 +491,7 @@
 
                     <h4>Exemplo Detalhado: Modelo de Sinalização de Spence</h4>
                     <p>Dois grupos de trabalhadores, G1 (baixa produtividade, PMg = $10k) e G2 (alta produtividade, PMg = $20k). O custo de obter 'y' anos de educação é C1(y) = 40y para G1 e C2(y) = 20y para G2. O benefício de ser visto como G2 é um salário $10k maior por ano, ou $100k em 10 anos.</p>
-                    <ul class="list-disc list-inside space-y-2 mt-2">
+                    <ul class="space-y-2 mt-4">
                         <li><strong>Análise Custo-Benefício para G1:</strong> Compensa estudar se Benefício > Custo. $100k > 40k * y => y < 2.5 anos. G1 não estudará mais que 2.5 anos.</li>
                         <li><strong>Análise Custo-Benefício para G2:</strong> Compensa estudar se Benefício > Custo. $100k > 20k * y => y < 5 anos. G2 está disposto a estudar até 5 anos.</li>
                         <li><strong>Sinalização Eficaz:</strong> A firma pode estabelecer um requisito de educação y* tal que 2.5 < y* < 5. Por exemplo, se a firma exigir y* = 3 anos, apenas os trabalhadores do G2 acharão vantajoso cumprir o requisito, sinalizando sua alta produtividade.</li>
@@ -451,9 +499,6 @@
                 </section>
             </div>
 
-            <!-- =================================================================== -->
-            <!-- == ABA 4: EXERCÍCIOS RESOLVIDOS E SUGESTÕES                       == -->
-            <!-- =================================================================== -->
             <div id="exercicios" class="tab-panel">
                 <section class="content-section">
                     <h2>Exercícios Resolvidos e Sugestões</h2>
@@ -466,15 +511,15 @@
                         <div class="solution">
                             <p><strong>a) A distribuição é eficiente?</strong></p>
                             <p><strong>Não, a distribuição não é Pareto-eficiente.</strong> A condição para eficiência nas trocas é que a TMS entre os agentes seja igual. Aqui, TMS(Brasil) = 1 e TMS(Japão) = 4. Como as TMS são diferentes, existem trocas mutuamente vantajosas possíveis. O Japão valora mais o Alimento (está disposto a dar 4 Eletrônicos por 1 Alimento), enquanto o Brasil valora mais o Eletrônico (só exige 1 Eletrônico para ceder 1 Alimento).</p>
-                            <p class="mt-2"><strong>b) Análise da troca (1A por 2E):</strong></p>
-                            <ul class="list-disc list-inside space-y-1 mt-2">
+                            <p class="mt-4"><strong>b) Análise da troca (1A por 2E):</strong></p>
+                            <ul class="list-disc space-y-2 mt-2">
                                 <li><strong>Brasil:</strong> Cede 1A e recebe 2E. Para ceder 1A, o Brasil exigia no mínimo 1E. Como recebeu 2E, ele está melhor. Nova dotação: 9A e 5E.</li>
                                 <li><strong>Japão:</strong> Recebe 1A e cede 2E. Para receber 1A, o Japão estava disposto a ceder até 4E. Como cedeu apenas 2E, ele também está melhor. Nova dotação: 3A e 5E.</li>
                                 <li><strong>Conclusão:</strong> Ambos os países se beneficiaram com a troca, pois ela ocorreu a uma taxa (2E por 1A) que está entre as suas respectivas TMS.</li>
                             </ul>
                         </div>
                     </div>
-                    <p class="mt-4"><strong>Exercícios Sugeridos:</strong> Resolva os itens c) e d) do exercício 1 e o exercício 2 completo da Lista 8. Para o exercício 5 da Lista 9, calcule as vantagens comparativas e desenhe as FPPs de cada país.</p>
+                    <p class="mt-6 text-gray-400"><strong>Exercícios Sugeridos:</strong> Resolva os itens c) e d) do exercício 1 e o exercício 2 completo da Lista 8. Para o exercício 5 da Lista 9, calcule as vantagens comparativas e desenhe as FPPs de cada país.</p>
 
                     <h3 class="mt-8">Tema: Externalidades (Baseado na Lista 10)</h3>
                     <div class="exercise-block">
@@ -484,24 +529,21 @@
                             <p><strong>1. Produção de Equilíbrio Privado (sem considerar externalidade):</strong></p>
                             <p>O equilíbrio privado ocorre onde o benefício privado (Demanda) iguala o custo privado (CPM).</p>
                             <div class="formula">BSM = CPM => 40 - Q = 10 + Q => 30 = 2Q => <strong>Q_privado = 15</strong></div>
-                            <p class="mt-2"><strong>2. Produção de Equilíbrio Social (eficiente):</strong></p>
+                            <p class="mt-4"><strong>2. Produção de Equilíbrio Social (eficiente):</strong></p>
                             <p>A eficiência ocorre onde o benefício social (BSM) iguala o custo social (CSM). Primeiro, calculamos o CSM:</p>
                             <div class="formula">CSM = CPM + CEM = (10 + Q) + 0.5Q = 10 + 1.5Q</div>
                             <p>Agora, igualamos BSM e CSM:</p>
                             <div class="formula">40 - Q = 10 + 1.5Q => 30 = 2.5Q => <strong>Q* = 12</strong></div>
-                            <p class="mt-2"><strong>3. Imposto de Pigou (t):</strong></p>
+                            <p class="mt-4"><strong>3. Imposto de Pigou (t):</strong></p>
                             <p>O imposto ótimo deve ser igual ao Custo Externo Marginal (CEM) no nível de produção eficiente (Q* = 12).</p>
                             <div class="formula">t = CEM(Q*) = 0.5 * 12 => <strong>t = $6 por unidade</strong></div>
                             <p>Com o imposto, o novo custo para a firma seria CPM' = CPM + t = (10 + Q) + 6 = 16 + Q. O novo equilíbrio privado seria 40 - Q = 16 + Q => 24 = 2Q => Q = 12, que é o nível eficiente.</p>
                         </div>
                     </div>
-                    <p class="mt-4"><strong>Exercícios Sugeridos:</strong> Resolva o exercício sobre externalidade positiva (exercício 2) e o de permissões de emissão (exercício 3) da Lista 10.</p>
+                    <p class="mt-6 text-gray-400"><strong>Exercícios Sugeridos:</strong> Resolva o exercício sobre externalidade positiva (exercício 2) e o de permissões de emissão (exercício 3) da Lista 10.</p>
                 </section>
             </div>
 
-            <!-- =================================================================== -->
-            <!-- == ABA 5: GLOSSÁRIO                                               == -->
-            <!-- =================================================================== -->
             <div id="glossario" class="tab-panel">
                 <section class="content-section">
                     <h2>Glossário de Termos Essenciais</h2>
@@ -518,15 +560,14 @@
             </div>
         </main>
 
-        <!-- Rodapé -->
-        <footer class="text-center mt-10 pt-6 border-t border-gray-700">
+        <footer class="text-center mt-12 pt-8 border-t border-gray-800">
             <p class="text-gray-500">Criado para auxiliar nos estudos de Microeconomia II. Boa prova!</p>
         </footer>
     </div>
 
 <script>
     // ===================================================================
-    // == SCRIPT PARA FUNCIONALIDADE DA PÁGINA                           ==
+    // == SCRIPT PARA FUNCIONALIDADE DA PÁGINA                        ==
     // ===================================================================
     document.addEventListener('DOMContentLoaded', () => {
         // --- LÓGICA PARA AS ABAS DE NAVEGAÇÃO ---
@@ -560,8 +601,8 @@
             if (!pBomInput || !pRuimInput || !probRuimSlider || !resultDiv) return;
             
             // Pega os valores dos inputs
-            const pBom = parseFloat(pBomInput.value);
-            const pRuim = parseFloat(pRuimInput.value);
+            const pBom = parseFloat(pBomInput.value) || 0;
+            const pRuim = parseFloat(pRuimInput.value) || 0;
             const probRuim = parseFloat(probRuimSlider.value) / 100;
             const probBom = 1 - probRuim;
             
@@ -575,22 +616,29 @@
             const expectedPrice = (pBom * probBom) + (pRuim * probRuim);
             
             // Exibe o resultado formatado
-            resultDiv.innerHTML = `Preço médio que o comprador pagaria: <span class="text-blue-300">$${expectedPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>`;
+            resultDiv.innerHTML = `Preço médio que o comprador pagaria: <br><span class="text-blue-400 text-2xl font-bold mt-2 block">R$ ${expectedPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>`;
         }
         
-        // Adiciona o listener para o slider de probabilidade
-        if (probRuimSlider) {
-            probRuimSlider.addEventListener('input', () => {
-                if(probRuimLabel) probRuimLabel.textContent = `${probRuimSlider.value}%`;
-                calculateLemonPrice(); // Recalcula a cada mudança no slider
-            });
+        function setupCalculatorListeners() {
+            // Adiciona o listener para o slider de probabilidade
+            if (probRuimSlider && probRuimLabel) {
+                probRuimSlider.addEventListener('input', () => {
+                    probRuimLabel.textContent = `${probRuimSlider.value}%`;
+                    calculateLemonPrice(); // Recalcula a cada mudança no slider
+                });
+            }
+            
+            // Adiciona o listener para o botão de cálculo
+            if (calculateBtn) {
+                calculateBtn.addEventListener('click', calculateLemonPrice);
+            }
+
+            // Adiciona listeners aos inputs de número para recalcular dinamicamente
+            if (pBomInput) pBomInput.addEventListener('input', calculateLemonPrice);
+            if (pRuimInput) pRuimInput.addEventListener('input', calculateLemonPrice);
         }
-        
-        // Adiciona o listener para o botão de cálculo
-        if (calculateBtn) {
-            calculateBtn.addEventListener('click', calculateLemonPrice);
-        }
-        
+
+        setupCalculatorListeners();
         // Executa o cálculo uma vez na carga inicial da página
         calculateLemonPrice();
     });
